@@ -31,8 +31,10 @@ export class AppComponent  {
     this.loadDailyCricketMatchDetails()
 
     this.liveRefresh.subscribe(_ => {
-      if(this.status_enum === Status.live)
+      if(this.status_enum === Status.live){
         this.loadDailyCricketMatchDetails()
+      }
+        
     })
 
     
@@ -42,7 +44,7 @@ export class AppComponent  {
 
   loadDailyCricketMatchDetails():void{
     this.isDataLoading = true
-    console.info(this.status_enum)
+    //console.info(this.status_enum)
     this.dailyCricketService.getDailyCricketMatchDetails(this.status_enum).subscribe(res => {
       this.isDataLoading = false
       this.dailyCricketMatchDetails = res.body;
