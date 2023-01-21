@@ -1,4 +1,5 @@
 import { Component, VERSION } from '@angular/core';
+import { interval } from 'rxjs';
 import { DailyCricketMatchDetails, Status } from './daily-cricket-match-details';
 import { DailyCricketService } from './daily-cricket.service';
 
@@ -12,12 +13,13 @@ export class AppComponent  {
   status = 2;
   status_str = {
     fixture: 1,
-    live: 2,
-    result: 3
+    result: 2,
+    live: 3
   }
   status_enum: Status = Status.live;
   token = "";
   isDataLoading = false
+  readonly liveRefresh = interval(5000);
   dailyCricketMatchDetails!:DailyCricketMatchDetails;
 
   
@@ -29,6 +31,10 @@ export class AppComponent  {
     })
 
     this.loadDailyCricketMatchDetails()
+
+    this.liveRefresh.subscribe(_ => {
+      console.warn(_)
+    })
   }
 
 

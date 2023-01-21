@@ -14,8 +14,9 @@
 <table *ngIf="!isDataLoading" class="table table-light table-hover caption-top">
 
 <caption class="h5">
-  <span *ngIf="status == 3">Live Matches</span>
-  <span *ngIf="status == 2">Result of Completed Matches</span>
+  <span *ngIf="status_enum == status_str.live">Live Matches</span>
+  <span *ngIf="status_enum == status_str.result">Result of Completed Matches</span>
+  <span *ngIf="status_enum == status_str.fixture">Upcoming Matches</span>
 </caption>
 
 <thead class="table-info">
