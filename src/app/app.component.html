@@ -1,0 +1,104 @@
+<h2>Daily Cricket Match Details</h2>
+
+<button type="button" class="btn btn-outline-primary m-1" 
+(click)="showLiveMatch(3)">Live</button>
+<button type="button" class="btn btn-outline-dark m-1" (click)="showLiveMatch(2)">Result</button>
+
+<button type="button" class="btn btn-outline-success m-1" (click)="showLiveMatch(1)">Fixtures</button>
+
+
+
+<div class="table-responsive">
+<span *ngIf="isDataLoading" class="loader"></span>
+
+<table *ngIf="!isDataLoading" class="table table-light table-hover caption-top">
+
+<caption class="h5">
+  <span *ngIf="status == 3">Live Matches</span>
+  <span *ngIf="status == 2">Result of Completed Matches</span>
+</caption>
+
+<thead class="table-info">
+  <tr>
+    
+    <th scope="col">Format</th>
+    <th scope="col">Torunament</th>
+    <th scope="col">Match</th>
+    <th scope="col">Score</th>
+    <th scope="col">Result/Status</th>
+    <th scope="col">Venue</th>
+    <th scope="col">Time (Local)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let item of dailyCricketMatchDetails?.response?.items">
+    
+    <td>{{item?.format_str}}</td>
+
+    <td>{{item?.competition?.title}} {{item?.competition?.season}}</td>
+
+    <th scope="row">
+      <span class="px-2">
+      <img src="{{item?.teama?.logo_url}}" width="20"> {{item?.teama?.short_name}}
+      </span>
+      v
+      <span class="px-2">
+      <img src="{{item?.teamb?.logo_url}}" width="20"> {{item?.teamb?.short_name}}
+      </span> 
+      
+    </th>
+    <td>
+      <span class="row">
+          {{item?.teama?.scores_full ? item?.teama?.name : ''}} {{item?.teama?.scores_full}}
+      </span>
+
+      <span class="row">
+      {{item?.teamb?.scores_full ? item?.teamb?.name : ''}} 
+      {{item?.teamb?.scores_full}}
+      </span>
+
+    </td>
+
+    <td>
+      {{item?.status_note ? item?.status_note : item?.result}}
+    </td>
+
+    <td>{{item?.venue?.name}},
+        {{item?.venue?.location}},
+        {{item?.venue?.country}},
+    </td>
+
+    <td>
+      {{item?.date_start_ist | date : 'shortTime'}} <br/>
+      {{item?.date_start | date : 'mediumDate'}}
+    </td>
+
+
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
+<div class="h3" *ngIf="dailyCricketMatchDetails?.response?.items?.length == 0">
+  <p *ngIf="status == 2">No Result Found</p>
+  <p *ngIf="status == 3">No Live Match Found</p>
+  
+</div>
+
+
+
+<nav aria-label="Page navigation example">
+<ul class="pagination justify-content-center">
+  <li class="page-item disabled">
+    <a class="page-link">Previous</a>
+  </li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
+  <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+  <li class="page-item">
+    <a class="page-link" href="#">Next</a>
+  </li>
+</ul>
+</nav>
