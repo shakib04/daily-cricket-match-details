@@ -10,7 +10,7 @@ import { DailyCricketService } from './daily-cricket.service';
 })
 export class AppComponent  {
   name = 'Angular ' + VERSION.major;
-  status = 2;
+ 
   status_str = {
     fixture: 1,
     result: 2,
@@ -19,32 +19,34 @@ export class AppComponent  {
   status_enum: Status = Status.live;
   token = "";
   isDataLoading = false
-  readonly liveRefresh = interval(5000);
+  readonly liveRefresh = interval(10000);
   dailyCricketMatchDetails!:DailyCricketMatchDetails;
-
-  
 
   constructor(protected dailyCricketService: DailyCricketService){
     dailyCricketService.getToken().subscribe(res => {
       this.token = res.body;
-      console.info(this.token)
+      //console.info(this.token)
     })
 
     this.loadDailyCricketMatchDetails()
 
     this.liveRefresh.subscribe(_ => {
-      console.warn(_)
+      if(this.status_enum === Status.live)
+        this.loadDailyCricketMatchDetails()
     })
+
+    
   }
 
 
 
   loadDailyCricketMatchDetails():void{
     this.isDataLoading = true
+    console.info(this.status_enum)
     this.dailyCricketService.getDailyCricketMatchDetails(this.status_enum).subscribe(res => {
       this.isDataLoading = false
       this.dailyCricketMatchDetails = res.body;
-      console.info(this.dailyCricketMatchDetails)
+      //console.info(this.dailyCricketMatchDetails)
     })
   }
 

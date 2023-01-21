@@ -83,8 +83,10 @@
 
 
 <div class="h3" *ngIf="dailyCricketMatchDetails?.response?.items?.length == 0">
-  <p *ngIf="status == 2">No Result Found</p>
-  <p *ngIf="status == 3">No Live Match Found</p>
+  <p *ngIf="status_enum == status_str.result">No Result Found</p>
+  <p *ngIf="status_enum == status_str.live">No Live Match Found</p>
+
+  <p *ngIf="status_enum == status_str.fixture">No Fixture Found</p>
   
 </div>
 
