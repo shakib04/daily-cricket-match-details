@@ -104,3 +104,9 @@ export interface DC_Toss{
 }
 
 
+export enum Status {
+  fixture = 1,
+  live = 2,
+  result = 3
+}
+

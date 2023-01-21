@@ -1,10 +1,10 @@
 <h2>Daily Cricket Match Details</h2>
 
 <button type="button" class="btn btn-outline-primary m-1" 
-(click)="showLiveMatch(3)">Live</button>
-<button type="button" class="btn btn-outline-dark m-1" (click)="showLiveMatch(2)">Result</button>
+(click)="showLiveMatch(status_str.live)">Live</button>
+<button type="button" class="btn btn-outline-dark m-1" (click)="showLiveMatch(status_str.result)">Result</button>
 
-<button type="button" class="btn btn-outline-success m-1" (click)="showLiveMatch(1)">Fixtures</button>
+<button type="button" class="btn btn-outline-success m-1" (click)="showLiveMatch(status_str.fixture)">Fixtures</button>
 
 
 
